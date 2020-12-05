@@ -1,11 +1,6 @@
 const solve = (input, part) => {
-    if (part === 1) {
-        const blah = input.reduce(sledRentalPasswordValidationReducer, 0)
-        return blah;
-    } else {
-        const blah = input.reduce(tobogganPasswordValidationReducer, 0)
-        return blah;
-    }
+    const reducerForPart = part === 1 ? sledRentalPasswordValidationReducer : tobogganPasswordValidationReducer;
+    return  input.reduce(reducerForPart, 0);
 }
 
 const tobogganPasswordValidationReducer = (accumulator, currentValue) => {
