@@ -43,6 +43,6 @@ const splitRule = (rule) => {
     return {lowerBound: parseInt(bounds[0]), upperBound: parseInt(bounds[1]), character}
 }
 
-const expected = part => part === 1 ? 980499 : 200637446;
+const expected = part => part === 1 ? 569 : 346;
 
 module.exports = { solve, expected, splitPasswordAndRule, splitRule };
