@@ -7,7 +7,7 @@ test('solve', () => {
   'BBFFBBFRLL'
   ]
   expect(solve(input, 1)).toBe(820);
-  expect(solve(input, 2)).toBe(640);
+  expect(solve(input, 2)).toBe(120);
 });
 
 test('getSeatsRowAndColumn', () => {
