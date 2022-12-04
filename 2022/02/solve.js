@@ -1,5 +1,3 @@
-const { endsWith } = require("lodash");
-
 const solve = (input, part) => {
      //a rock, b paper, c scissors
      //x rock, y paper, z scissors
