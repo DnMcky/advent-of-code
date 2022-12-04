@@ -45,7 +45,7 @@ for(let day = startDay; day <= endDay; day++) {
                     .toString()
                     .split('\n')
                     .map(s => s.replace(/\r$/, ''))
-                    .filter(s => s.length > 0);
+                    // .filter(s => s.length > 0);
     for(let part of [1,2]) {
         const expected = solver.expected(part);
         const [answer,duration] = timed(() => solver.solve(text, part));
