@@ -1,4 +1,4 @@
-const { solve, checkRucksackForItemInBothCompartments } = require('./solve');
+const { solve, checkRucksackForItemInBothCompartments, groupElfRucksacks } = require('./solve');
   test('checkRucksackForItemInBothCompartments', () => {
     expect(checkRucksackForItemInBothCompartments('vJrwpWtwJgWrhcsFMMfFFhFp')).toBe('p');
     expect(checkRucksackForItemInBothCompartments('jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL')).toBe('L');
@@ -8,6 +8,20 @@ const { solve, checkRucksackForItemInBothCompartments } = require('./solve');
     expect(checkRucksackForItemInBothCompartments('CrZsJsPPZsGzwwsLwLmpwMDw')).toBe('s');
   });
 
+  test('groupElfRucksacks', () => {
+    const input = ['vJrwpWtwJgWrhcsFMMfFFhFp',
+    'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+    'PmmdzqPrVvPwwTWBwg',
+    'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+    'ttgJtRGJQctTZtZT',
+    'CrZsJsPPZsGzwwsLwLmpwMDw']
+    expect(groupElfRucksacks(input)).toStrictEqual([['vJrwpWtwJgWrhcsFMMfFFhFp',
+    'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+    'PmmdzqPrVvPwwTWBwg'], ['wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+    'ttgJtRGJQctTZtZT',
+    'CrZsJsPPZsGzwwsLwLmpwMDw']])
+  })
+
   test('solve', () => {
     const input = ['vJrwpWtwJgWrhcsFMMfFFhFp',
       'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
@@ -16,7 +30,7 @@ const { solve, checkRucksackForItemInBothCompartments } = require('./solve');
       'ttgJtRGJQctTZtZT',
       'CrZsJsPPZsGzwwsLwLmpwMDw']
     expect(solve(input, 1)).toBe(157);
-    // expect(solve(input, 2)).toBe(12);    
+    expect(solve(input, 2)).toBe(70);    
   });
   
 

@@ -1,19 +1,53 @@
 const solve = (input, part) => {
-     return input.reduce((accumulator, rucksack) => {
-          const itemToBeRearranged = checkRucksackForItemInBothCompartments(rucksack)
-          return accumulator + PRIORITY_SCORE[itemToBeRearranged];
-     }, 0)
+     if (part === 1) {
+          return input.reduce((accumulator, rucksack) => {
+               const itemToBeRearranged = checkRucksackForItemInBothCompartments(rucksack);
+               return accumulator + PRIORITY_SCORE[itemToBeRearranged];
+          }, 0);
+     } else {
+          const groupedElfRucksacks = groupElfRucksacks(input);
+          return groupedElfRucksacks.reduce((accumulator, group) => {
+               const commonItem = checkGroupForCommonItem(group);
+               return accumulator + PRIORITY_SCORE[commonItem];
+          }, 0);
+     };
+};
+
+const groupElfRucksacks = (input) => {
+     const GROUP_SIZE = 3;    
+
+     return input.reduce((groupedRucksacks, rucksack, index) => { 
+          const groupIndex = Math.floor(index/GROUP_SIZE);
+
+          if(!groupedRucksacks[groupIndex]) {
+               groupedRucksacks[groupIndex] = [];
+          }
+
+          groupedRucksacks[groupIndex].push(rucksack);
+
+          return groupedRucksacks;
+     }, []);
+};
+
+const checkGroupForCommonItem = (group) => {
+     const [rucksack1, rucksack2, rucksack3] = group;
+     const rucksackAsList = rucksack1.split('');
+
+     const [match] = rucksackAsList.filter((item => {
+          return rucksack2.includes(item) && rucksack3.includes(item);
+     }));
+     return match;
 }
 
 const checkRucksackForItemInBothCompartments = (compartments) => {
-     const halfWayPoint = compartments.length/2
-     const compartmentA = compartments.slice(0, halfWayPoint)
-     const compartmentB = compartments.slice(halfWayPoint)
+     const halfWayPoint = compartments.length/2;
+     const compartmentA = compartments.slice(0, halfWayPoint);
+     const compartmentB = compartments.slice(halfWayPoint);
      const compartmentAsList = compartmentA.split('');
 
      const [match] = compartmentAsList.filter((item) => compartmentB.includes(item));
      return match;
-}
+};
 
 const PRIORITY_SCORE = {
      a: 1, 
@@ -70,6 +104,6 @@ const PRIORITY_SCORE = {
      Z: 52
 }
 
-const expected = part => part === 1 ? 13268 : 15508;
+const expected = part => part === 1 ? 7831 : 2683;
 
-module.exports = { solve, expected, checkRucksackForItemInBothCompartments };
+module.exports = { solve, expected, checkRucksackForItemInBothCompartments, groupElfRucksacks };
